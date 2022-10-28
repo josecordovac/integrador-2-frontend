@@ -1,0 +1,80 @@
+@import "../../sass/variables";
+
+.login-container {
+  width: 100%;
+  position: relative;
+  margin-top: calc(50vh - 190.8px);
+
+  .logo-programate {
+    width: 200px;
+
+    position: absolute;
+    top: -50%;
+    right: 2%;
+  }
+  
+  .form-container {
+    width: 343px;
+    margin: auto;
+
+    .logo {
+      width: 154px;
+      margin: auto;
+    
+      img {
+        width: 154px;
+      }
+    }
+
+    .form-item {
+      height: 40px;
+      position: relative;
+      margin-top: 24px;
+    
+      label {
+        font-size: 14px;
+        background-color: white;
+        color: $azul;
+        position: absolute;
+        left: 26.5px;
+        top: -10px;
+      }
+
+      input {
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid $azul;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding: {
+          top: 11px;
+          bottom: 8px;
+          left: 16px;
+        };
+      }
+    }
+    
+    .form-link {
+      text-align: end;
+      margin-top: 12px;
+    
+      a {
+        font-size: 14px;
+    
+        &:link {
+          color: $azul;
+        }
+      }
+    }
+    
+    .btn {
+      @include btn(343px, 40px, 16px, white, 400, $azul);
+      margin-top: 22px;
+      border-color: $azul;
+
+      &:hover {
+        @include btn(343px, 40px, 16px, $azul, 400, white);
+      }
+    }
+  }
+}
