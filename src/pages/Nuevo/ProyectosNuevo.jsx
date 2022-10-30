@@ -23,9 +23,6 @@ import { useNavigate } from "react-router-dom";
 import SelectComponent from "../../components/form/select/SelectComponent";
 import { handleInputChanges } from "../../helpers/functions";
 
-// import MenuItem from "@material-ui/core/MenuItem";
-// import Select from "@material-ui/core/Select";
-
 const ProyectosNuevo = () => {
   const [data, setData] = useState({
     id_proyecto: 0,
@@ -117,6 +114,25 @@ const ProyectosNuevo = () => {
       label: "QA",
     },
   ];
+
+  const saveProyect = () => {
+    // let objSend = new Object(...data);
+
+    console.log({ ...data, proyecto: proyectTable });
+    let valor = JSON.stringify({ ...data, proyecto: proyectTable });
+    console.log(valor);
+
+    fetch("http://localhost:3000/proyects", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: valor,
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
   return (
     <>
@@ -358,6 +374,7 @@ const ProyectosNuevo = () => {
               color="primary"
               startIcon={<CheckIcon />}
               style={{ marginBottom: "15px", backgroundColor: "#004E9E" }}
+              onClick={saveProyect}
             >
               PROCESAR
             </Button>

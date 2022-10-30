@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import FilterListIcon from "@material-ui/icons/FilterList";
@@ -7,8 +7,6 @@ import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
-import InputComponent from "../../components/form/input/InputComponent";
-import SelectComponent from "../form/select/SelectComponent";
 import {
   Button,
   Table,
@@ -18,7 +16,6 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import { handleInputChanges } from "../../helpers/functions";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 
