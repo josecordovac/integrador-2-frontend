@@ -22,6 +22,8 @@ import CheckIcon from "@material-ui/icons/Check";
 import { useNavigate } from "react-router-dom";
 import SelectComponent from "../../components/form/select/SelectComponent";
 import { handleInputChanges } from "../../helpers/functions";
+import { RequestUtil } from "../../util/RequestUtil";
+import { useEffect } from "react";
 
 const ProyectosNuevo = () => {
   const [data, setData] = useState({
@@ -41,79 +43,66 @@ const ProyectosNuevo = () => {
   });
   const [proyectTable, setProyectTable] = useState([]);
   const [empleado, setEmpleado] = useState("");
+  
+  const [listClients, setListClients] = useState([]);
+  const [listEmployees, setListEmployees] = useState([]);
+  const [listState, setListState] = useState([]);
+  const [listRol, setListRol] = useState([]);
+  const [listProyectType, setListProyectType] = useState([]);
+
   const [rol, setRol] = useState("");
   const navigate = useNavigate();
 
-  const tipoProyectos = [
-    {
-      value: 1,
-      label: "tipo 1",
-    },
-    {
-      value: 2,
-      label: "tipo 2",
-    },
-    {
-      value: 3,
-      label: "tipo 3",
-    },
-  ];
+  const getClients = () => {
+    RequestUtil.postData({
+      url: "get-data",
+      queryId: 1,   
+      params: null,
+      fnOk({dataList}) {
+        setListClients(dataList);
+      }
+    });
+  }
 
-  const estados = [
-    {
-      value: 1,
-      label: "Proceso",
-    },
-    {
-      value: 2,
-      label: "Anulado",
-    },
-    {
-      value: 3,
-      label: "Concluido",
-    },
-  ];
+  const getEmployees = () => {
+    RequestUtil.postData({
+      url: "get-data",
+      queryId: 2,   
+      fnOk({dataList}) {
+        setListEmployees(dataList);
+      }
+    });
+  }
 
-  const clientes = [
-    {
-      value: 1,
-      label: "Mario Torres",
-    },
-    {
-      value: 2,
-      label: "Jesus Yslao",
-    },
-  ];
+  const getStates = () => {
+    RequestUtil.postData({
+      url: "get-data",
+      queryId: 3,   
+      fnOk({dataList}) {
+        setListState(dataList);
+      }
+    });
+  }
 
-  const empleados = [
-    {
-      value: 1,
-      label: "Kevin Torres",
-    },
-    {
-      value: 2,
-      label: "Juan Carlos",
-    },
-  ];
+  const getRol = () => {
+    RequestUtil.postData({
+      url: "get-data",
+      queryId: 4,   
+      fnOk({dataList}) {
+        setListRol(dataList);
+      }
+    });
+  }
 
-  const roles = [
-    {
-      value: 1,
-      label: "Frontend",
-    },
-    {
-      value: 2,
-      label: "Backend",
-    },
-    {
-      value: 3,
-      label: "fullStack",
-    },
-    {
-      value: 4,
-      label: "QA",
-    },
-  ];
+  const getProjectType = () => {
+    RequestUtil.postData({
+      url: "get-data",
+      queryId: 5,   
+      fnOk({dataList}) {
+        setListProyectType(dataList);
+      }
+    });
+  }
 
   const saveProyect = () => {
     // let objSend = new Object(...data);
@@ -130,9 +119,17 @@ const ProyectosNuevo = () => {
       },
       body: valor,
     })
-      .then((res) => res.json())
+      .then((res) => res.text())
       .then((data) => console.log(data));
   };
+
+  useEffect(() => {
+    getClients();
+    getEmployees();
+    getStates();
+    getRol();
+    getProjectType();
+  }, []);
 
   return (
     <>
@@ -199,7 +196,7 @@ const ProyectosNuevo = () => {
                   <Grid item xs={5} sm={5} md={5} lg={2} xl={2} xxl={3}>
                     <SelectComponent
                       label="Tipo de proyecto"
-                      list={tipoProyectos}
+                      list={listProyectType}
                       name="id_tipo"
                       value={data.id_tipo}
                       onChange={(e) => handleInputChanges(e, data, setData)}
@@ -208,7 +205,7 @@ const ProyectosNuevo = () => {
                   <Grid item xs={5} sm={5} md={5} lg={2} xl={2} xxl={3}>
                     <SelectComponent
                       label="Estado del proyecto"
-                      list={estados}
+                      list={listState}
                       name="id_estado"
                       value={data.id_estado}
                       onChange={(e) => handleInputChanges(e, data, setData)}
@@ -263,7 +260,7 @@ const ProyectosNuevo = () => {
                   <Grid item xs={5} sm={5} md={3} lg={3} xl={3} xxl={3}>
                     <SelectComponent
                       label="Seleccione un Personal"
-                      list={empleados}
+                      list={listEmployees}
                       name="id_empleado"
                       value={data.id_empleado}
                       onChange={(e) =>
@@ -272,7 +269,7 @@ const ProyectosNuevo = () => {
                           data,
                           setData,
                           setEmpleado,
-                          empleados
+                          listEmployees
                         )
                       }
                     />
@@ -280,11 +277,11 @@ const ProyectosNuevo = () => {
                   <Grid item xs={5} sm={5} md={3} lg={3} xl={3} xxl={3}>
                     <SelectComponent
                       label="Rol"
-                      list={roles}
+                      list={listRol}
                       name="id_rol"
                       value={data.id_rol}
                       onChange={(e) =>
-                        handleInputChanges(e, data, setData, setRol, roles)
+                        handleInputChanges(e, data, setData, setRol, listRol)
                       }
                     />
                   </Grid>
@@ -329,7 +326,7 @@ const ProyectosNuevo = () => {
                   <Grid item xs={5} sm={5} md={3} lg={3} xl={3} xxl={3}>
                     <SelectComponent
                       label="Seleccione un cliente"
-                      list={clientes}
+                      list={listClients}
                       name="id_cliente"
                       value={data.id_cliente}
                       onChange={(e) => handleInputChanges(e, data, setData)}
