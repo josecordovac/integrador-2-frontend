@@ -5,6 +5,7 @@ import Usuarios from "./pages/Usuarios";
 import Proyectos from "./pages/Proyectos";
 import UsuarioNuevo from "./pages/Nuevo/UsuarioNuevo";
 import ProyectosNuevo from "./pages/Nuevo/ProyectosNuevo";
+import Informes from "./pages/Informes";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/proyectos" element={<Proyectos />} />
           <Route path="/usuarios/:nuevo" element={<UsuarioNuevo />} />
           <Route path="/proyectos/:nuevo" element={<ProyectosNuevo />} />
+          <Route path="/informes" element={<Informes />} />
         </Routes>
       </Router>
     </>

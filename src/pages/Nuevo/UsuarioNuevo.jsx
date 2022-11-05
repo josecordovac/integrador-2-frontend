@@ -25,11 +25,12 @@ import SelectComponent from "../../components/form/select/SelectComponent";
 
 const UsuarioNuevo = () => {
   const [data, setData] = useState({
-    N_FACTURA: "",
-    FECHA_EMISION: "",
-    PROVEEDOR: "",
-    RUC: "",
-    PRODUCTO: "",
+    N_CODIGO: "",
+    FECHA_INGRESO: "",
+    NOMBRE: "",
+    APATERNO: "",
+    AMATERNO: "",
+    ESTADO: "",
   });
   const [productsTable, setProductsTable] = useState([]);
   const [total, setTotal] = useState(0);
@@ -75,68 +76,23 @@ const UsuarioNuevo = () => {
                   gutterBottom
                   className={"title-header"}
                 >
-                  Datos del Documento de Ingreso
+                  Datos del Usuario
                 </Typography>
                 <Grid container spacing={2} sx={{ paddingRight: 2 }}>
                   <Grid item xs={12} sm={6} md={4} lg={4} xl={4} xxl={4}>
                     <InputComponent
-                      label="N° Boleta"
-                      name="N_BOLETA"
-                      value={data?.N_BOLETA}
+                      label="Código"
+                      name="U_CODIGO"
+                      value={data?.U_CODIGO}
                       onChange={handleInputChanges}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={4} lg={2} xl={2} xxl={2}>
                     <InputComponent
                       type="date"
-                      label="Fecha Emision:"
-                      name="FECHA_EMISION"
-                      value={data?.FECHA_EMISION}
-                      onChange={handleInputChanges}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
-            </React.Fragment>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-          <Paper
-            sx={{
-              paddingTop: 2,
-              paddingBottom: 2,
-              paddingLeft: 2,
-              display: "flex",
-              flexDirection: "column",
-            }}
-            style={{ width: "95%", margin: "auto", marginTop: "20px" }}
-          >
-            <React.Fragment>
-              <Box style={{ width: "95%", margin: "auto" }}>
-                <Typography
-                  style={{ marginBottom: "15px" }}
-                  component="h2"
-                  variant="h6"
-                  color="primary"
-                  gutterBottom
-                  className={"title-header"}
-                >
-                  Datos del Cliente
-                </Typography>
-                <Grid container spacing={2} sx={{ paddingRight: 2 }}>
-                  <Grid item xs={12} sm={6} md={4} lg={4} xl={3} xxl={3}>
-                    <InputComponent
-                      label="Cliente"
-                      name="CLIENTE"
-                      value={data?.CLIENTE}
-                      onChange={handleInputChanges}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4} lg={3} xl={3} xxl={3}>
-                    <InputComponent
-                      label="N° Documento"
-                      name="N_DOCUMENTO"
-                      value={data?.N_DOCUMENTO}
+                      label="Fecha:"
+                      name="FECHA_INGRESO"
+                      value={data?.FECHA_INGRESO}
                       onChange={handleInputChanges}
                     />
                   </Grid>

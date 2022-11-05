@@ -163,7 +163,7 @@ const TableRegistro = ({ headTable, ruta, data, navigator, tableName }) => {
                 >
                   <TableCell align="center">{`0${i + 1}`}</TableCell>
                   <TableCell align="center">
-                    {row?.N_FACTURA || row?.N_BOLETA || row?.NOMBRE_PRODUCTO}
+                    {row?.ESTADO || row?.N_USUARIO || row?.NOMBRE}
                   </TableCell>
                   <TableCell align="center">
                     {row?.FECHA_EMISION || row?.STOCK}

@@ -19,8 +19,8 @@ const Header = ({ title }) => {
         <div onClick={() => navigator('/proyectos')}>
           Proyectos
         </div>
-        <div onClick={() => navigator('/proyectos')}>
-          Proyectos y Mantenimientos
+        <div onClick={() => navigator('/informes')}>
+          Informes
         </div>
       </div>
       <div className='header__container_user'>

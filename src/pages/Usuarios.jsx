@@ -4,12 +4,12 @@ import Filtrar from "../components/Filtrar/Filtrar";
 
 const Usuarios = () => {
   const headTable = [
-    { name: "N°" },
-    { name: "N° FACTURA" },
-    { name: "FECHA EMISIÓN" },
-    { name: "PROVEEDOR" },
-    { name: "TOTAL" },
-    { name: "ESTADO" },
+    { name: "Código" },
+    { name: "Nombre" },
+    { name: "Apellido Paterno" },
+    { name: "Apellido Materno" },
+    { name: "Fecha Ingreso" },
+    { name: "Estado" },
   ];
 
   const ruta = "/usuarios/new";
