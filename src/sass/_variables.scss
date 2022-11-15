@@ -1,0 +1,19 @@
+// Variables
+$azul: #004E9E;
+$font: "Poppins";
+
+// Mixin
+@mixin btn($width, $heigth, $size, $text-color, $weigth, $back-color:rgba(255, 255, 255, 0), $border-Color:none, $border:0) {
+  width: $width;
+  height: $heigth;
+  font-size: $size;
+  color: $text-color;
+  font-family: $font;
+  font-weight: $weigth;
+  background-color: $back-color;
+  border-radius: 10px;
+  
+  @if $border != 0 {
+    border: $border solid $border-Color;
+  }
+}
