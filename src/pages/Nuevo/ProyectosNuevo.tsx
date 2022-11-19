@@ -20,6 +20,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import CheckIcon from "@material-ui/icons/Check";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SelectComponent from "../../components/form/select/SelectComponent";
 import { handleInputChanges } from "../../helpers/functions";
 import { RequestUtil } from "../../util/RequestUtil";
@@ -35,7 +36,7 @@ const ProyectosNuevo = () => {
     id_cliente: 0,
     id_tipo: 0,
     nombre: "",
-    codigo_gestion: "",
+    codigo_gestion: 0,
     fecha_inicio: "",
     fecha_fin: "",
     horas_planificadas: 0,
@@ -55,6 +56,7 @@ const ProyectosNuevo = () => {
 
   const [rol, setRol] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const getClients = () => {
     RequestUtil.postData({
@@ -107,9 +109,7 @@ const ProyectosNuevo = () => {
   }
 
   const saveProyect = () => {
-
-    // console.log({ ...data, proyectoDetalle: proyectTable });
-    // console.log(JSON.stringify({ ...data, proyectoDetalle: proyectTable }));
+    console.log({ ...data, proyectoDetalle: proyectTable });
 
     RequestUtil.postData({
       url: "save-data",
@@ -117,6 +117,28 @@ const ProyectosNuevo = () => {
       params: { ...data, proyectoDetalle: proyectTable },
       fnOk(resp) {
         console.log(resp)
+        MessageUtil('success', 'Datos guardados con exito!', 'se agrego un nuevo proyecto.');
+      }
+    })
+  };
+
+  const getProjectById = (id: string | undefined) => {
+    console.log("id");
+    console.log(JSON.stringify({ id_proyecto: id }));
+    
+    RequestUtil.postData({
+      url: "save-data",
+      queryId: 8,
+      params: { id_proyecto: id },
+      fnOk({dataObject}) {
+        console.log(dataObject)
+        setProyectTable(dataObject?.PROJECT_DETAIL);
+        setData({
+          ...dataObject?.PROJECT, 
+          horas: 0,
+          id_empleado: 0,
+          id_rol: 0,
+        });
       }
     })
   };
@@ -127,6 +149,10 @@ const ProyectosNuevo = () => {
     getStates();
     getRol();
     getProjectType();
+
+    if (id !== 'new') 
+      getProjectById(id)
+    
   }, []);
 
   return (
@@ -164,7 +190,7 @@ const ProyectosNuevo = () => {
                       type="number"
                       label="Codigo Gestion"
                       name="codigo_gestion"
-                      value={data.codigo_gestion}
+                      value={(data.codigo_gestion).toString()}
                       onChange={(e) => handleInputChanges(e, data, setData)}
                     />
                   </Grid>
@@ -386,6 +412,7 @@ const TableProyectos = ({
     setProyectTable([
       ...proyectTable,
       {
+        id_proyecto_detalle: 0,
         id_empleado: data.id_empleado,
         id_rol: data.id_rol,
         horas: data.horas,
@@ -453,7 +480,7 @@ const TableProyectos = ({
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <TableContainer component={Paper} style={{ marginTop: "20px" }}>
-                <Table size="small">
+                <Table size="medium">
                   <TableHead>
                     <TableRow>
                       {HeaderTableProducto?.map((head) => (

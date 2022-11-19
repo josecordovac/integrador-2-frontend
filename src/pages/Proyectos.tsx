@@ -93,7 +93,8 @@ const Proyectos = () => {
     { name: "ACCION" },
   ];
 
-  const ruta: string = "/proyectos/new";
+  const newRoute: string = "/proyectos/new";
+  const route: string = "/proyectos/";
 
   const fields:JSX.Element =  
     <Grid container spacing={2}>
@@ -156,7 +157,8 @@ const Proyectos = () => {
       <Header />
       <Filtrar
         headTable={headTable}
-        ruta={ruta}
+        newRoute={newRoute}
+        route={route}
         tableName={"Lista de proyectos"}
         fields={fields}
         resultListTable={listProyect}

@@ -18,11 +18,11 @@ import {
   TablePagination,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from '@material-ui/icons/Edit';
 import { Projects } from '../../interfaces/project';
 import { FiltrarProps, TbRegistroProps } from '../../interfaces/filtrar';
 
-const Filtrar = ({ headTable, ruta, tableName, fields, resultListTable, functionSearchTable, clearData, pagination }: FiltrarProps<Projects>) => {
+const Filtrar = ({ headTable, newRoute, route, tableName, fields, resultListTable, functionSearchTable, clearData, pagination }: FiltrarProps<Projects>) => {
   const navigator = useNavigate();
 
   const onChangePage = (ev: any, page: any) => {
@@ -97,7 +97,8 @@ const Filtrar = ({ headTable, ruta, tableName, fields, resultListTable, function
               <Box style={{ width: "95%", margin: "auto" }}>
                 <TableRegistro
                   headTable={headTable}
-                  ruta={ruta}
+                  newRoute={newRoute}
+                  route={route}
                   navigator={navigator}
                   tableName={tableName}
                   resultListTable={resultListTable}
@@ -115,7 +116,7 @@ const Filtrar = ({ headTable, ruta, tableName, fields, resultListTable, function
   );
 };
 
-const TableRegistro = ({ headTable, ruta, navigator, tableName, resultListTable, pagination, onChangePage, onChangeRow }: TbRegistroProps< Projects>) => {
+const TableRegistro = ({ headTable, newRoute, route, navigator, tableName, resultListTable, pagination, onChangePage, onChangeRow }: TbRegistroProps< Projects>) => {
 
   const handleChangePage = (event: any, newPage: any): void => {
     if(onChangePage){
@@ -155,14 +156,14 @@ const TableRegistro = ({ headTable, ruta, navigator, tableName, resultListTable,
           color="primary"
           startIcon={<AddIcon />}
           style={{ backgroundColor: "#004E9E" }}
-          onClick={() => navigator(ruta)}
+          onClick={() => navigator(newRoute)}
         >
           NUEVO
         </Button>
       </Box>
       <br />
       <TableContainer component={Paper}>
-        <Table style={{ minWidth: "100%" }} size="small">
+        <Table style={{ minWidth: "100%" }} size="medium">
           <TableHead className={"header-table"}>
             <TableRow>
               {headTable?.map((head) => (
@@ -197,7 +198,7 @@ const TableRegistro = ({ headTable, ruta, navigator, tableName, resultListTable,
                   <TableCell align="center">
                     <IconButton
                     >
-                      <DeleteIcon color="error"/>
+                      <EditIcon onClick={() => navigator(route + row.id_proyecto)} color="action"/>
                     </IconButton>
                   </TableCell>
                 </TableRow>

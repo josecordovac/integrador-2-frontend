@@ -3,7 +3,8 @@ import { HeadTable, Pagination } from "./headTable";
 
 export interface FiltrarProps<T> {
   headTable: HeadTable[];
-  ruta: string; 
+  newRoute: string; 
+  route: string; 
   tableName: string; 
   fields: JSX.Element;
   resultListTable: T[];
@@ -14,7 +15,8 @@ export interface FiltrarProps<T> {
 
 export interface TbRegistroProps<T> {
   headTable: HeadTable[];
-  ruta: string; 
+  newRoute: string; 
+  route: string; 
   tableName: string; 
   navigator: NavigateFunction;
   resultListTable: T[];
