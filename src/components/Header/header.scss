@@ -45,15 +45,21 @@
     }
   }
 
-  .header__container_user {
-    width: 16%;
-    margin: auto;
+  .header__container__user {
+    width: max-content;
+    position: relative;
+    padding-right: 60px;
 
-    h2 {
-      width: 50%;
+    h3 {
       color: snow;
       text-align: center;
       display: inline-block;
+    }
+
+    .header__container__user__icon {
+      position: absolute;
+      right: 0;
+      top: calc(30px - 9px);
     }
   }
   

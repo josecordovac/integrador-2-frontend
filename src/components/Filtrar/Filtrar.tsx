@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import AddIcon from "@material-ui/icons/Add";
@@ -16,6 +15,7 @@ import {
   TableHead,
   TableRow,
   TablePagination,
+  Typography
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from '@material-ui/icons/Edit';

@@ -1,11 +1,21 @@
-import React from 'react'
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './header.scss'
 import logo from '../../assets/img/programate.svg'
-import CancelIcon from '@material-ui/icons/Cancel';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const Header = () => {
+  const [nameUser, setNameUser] = useState<string | null>('')
   const navigator = useNavigate();
+
+  const closeLogin = () => {
+    localStorage.clear();
+    navigator('/');
+  };
+
+  useEffect(() => {
+    setNameUser(localStorage.getItem('user'));
+  }, []);
 
   return (
     <header className='header__container'>
@@ -22,6 +32,12 @@ const Header = () => {
         {/* <div onClick={() => navigator('/proyectos')}>
           Proyectos y Mantenimientos
         </div> */}
+      </div>
+      <div className='header__container__user'>
+        <h3>{nameUser}</h3>
+        <div className='header__container__user__icon'>
+          <ExitToAppIcon style={{color: 'white'}} onClick={closeLogin} />
+        </div>
       </div>
     </header>
   )

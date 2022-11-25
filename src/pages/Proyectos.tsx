@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Filtrar from "../components/Filtrar/Filtrar";
 import Header from "../components/Header/Header";
 import Grid from "@material-ui/core/Grid";

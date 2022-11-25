@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import './login.scss'
 import user from '../../assets/img/icon.jpg'
 import logo from '../../assets/img/programate.svg'
-import { Link } from 'react-router-dom'
 import { RequestUtil } from '../../util/RequestUtil'
 import { handleInputChanges } from '../../helpers/functions';
 import { MessageUtil } from '../../util/Swal'
@@ -25,8 +24,10 @@ const Login = () => {
       url: "save-data",
       params: { ...data },
       queryId: 10,   
-      fnOk({message}) {
+      fnOk({dataList, message}) {
         if (message === '') return MessageUtil('error', `Usuario o contraseña incorrecto`, "");
+        let nameUser = dataList[0].nombre
+        localStorage.setItem('user', nameUser);
         navigate('home');
       }
     });
