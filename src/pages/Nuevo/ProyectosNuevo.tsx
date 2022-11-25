@@ -53,10 +53,21 @@ const ProyectosNuevo = () => {
   const [listState, setListState] = useState<Select[] | []>([]);
   const [listRol, setListRol] = useState<Select[] | []>([]);
   const [listProyectType, setListProyectType] = useState<Select[] | []>([]);
+  const [ idElementDetalle, setIdElementDetalle ] = useState<number[]>([]);
 
   const [rol, setRol] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const handleDeleteTable = (id: number) => {
+    RequestUtil.postData({
+      url: "save-data",
+      queryId: 9,
+      params: { id_proyecto_detalle: id },
+      fnOk(resp) {
+      }
+    })
+  };
 
   const getClients = () => {
     RequestUtil.postData({
@@ -109,6 +120,8 @@ const ProyectosNuevo = () => {
   }
 
   const saveProyect = () => {
+    idElementDetalle.forEach(id => handleDeleteTable(id));
+
     console.log({ ...data, proyectoDetalle: proyectTable });
 
     RequestUtil.postData({
@@ -350,6 +363,8 @@ const ProyectosNuevo = () => {
             setProyectTable={setProyectTable}
             empleado={empleado}
             rol={rol}
+            setIdElementDetalle={setIdElementDetalle}
+            id={id}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -393,6 +408,8 @@ const TableProyectos = ({
   setProyectTable,
   empleado,
   rol,
+  setIdElementDetalle,
+  id,
 }: TableProyectosProps) => {
   
   const addProduct = () => {
@@ -412,6 +429,7 @@ const TableProyectos = ({
     setProyectTable([
       ...proyectTable,
       {
+        id: 0,
         id_proyecto_detalle: 0,
         id_empleado: data.id_empleado,
         id_rol: data.id_rol,
@@ -423,7 +441,12 @@ const TableProyectos = ({
     
   };
 
-  const deleteRow = (index: number) => {
+  const deleteRow = (row: any, index: number) => {
+    if (id !== 'new') {
+      const idRow = proyectTable.find(element => element?.id_proyecto_detalle === row?.id_proyecto_detalle )!.id_proyecto_detalle;
+      setIdElementDetalle(preValue => ([...preValue, idRow]))
+    }
+    
     const list = proyectTable.filter((proyecto, i) => index !== i);
     setProyectTable(list);
   };
@@ -508,7 +531,7 @@ const TableProyectos = ({
                           <TableCell align="center">{`${row?.horas}`}</TableCell>
                           <TableCell align="center">
                             <IconButton
-                              onClick={() => deleteRow(i)}
+                              onClick={() => deleteRow(row, i)}
                             >
                               <DeleteIcon color="error"/>
                             </IconButton>
@@ -525,7 +548,7 @@ const TableProyectos = ({
           </Grid>
         </Box>
       </React.Fragment>
-      <Box style={{ width: "100%", height: "30px" }}></Box>
+      <Box style={{ width: "100%", height: "50px" }}></Box>
     </Paper>
   );
 };

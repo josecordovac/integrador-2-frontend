@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
-import Home from "./pages/Home";
-// import Usuarios from "./pages/Usuarios";
+import Home from "./pages/Home/Home";
 import Proyectos from "./pages/Proyectos";
-// import UsuarioNuevo from "./pages/Nuevo/UsuarioNuevo";
 import ProyectosNuevo from "./pages/Nuevo/ProyectosNuevo";
 
 function App() {

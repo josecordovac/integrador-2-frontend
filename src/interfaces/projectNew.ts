@@ -1,4 +1,5 @@
 export interface ProyectTable {
+  id: number;
   id_proyecto_detalle: number;
   id_empleado: number;
   id_rol: number;
@@ -13,6 +14,8 @@ export interface TableProyectosProps {
   setProyectTable:  React.Dispatch<React.SetStateAction<ProyectTable[]>>;
   empleado: string;
   rol: string;
+  setIdElementDetalle: React.Dispatch<React.SetStateAction<number[]>>;
+  id: string | undefined;
 }
 
 export interface DataNewProject {
