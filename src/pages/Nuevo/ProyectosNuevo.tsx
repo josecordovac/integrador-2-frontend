@@ -473,7 +473,7 @@ const TableProyectos = ({
             gutterBottom
             className={"title-header"}
           >
-            Tabla de proyectos
+            Tabla del personal
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -492,7 +492,7 @@ const TableProyectos = ({
                     style={{ marginBottom: "15px", backgroundColor: "#004E9E" }}
                     onClick={addProduct}
                   >
-                    AÑADIR
+                    AÑADIR PERSONAL
                   </Button>
                 </Grid>
               </Box>

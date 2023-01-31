@@ -8,26 +8,45 @@ import { handleInputChanges } from '../../helpers/functions';
 import { MessageUtil } from '../../util/Swal'
 
 interface login {
-  correo: string;
   contrasenia: string;
+  correo: string;
 }
 
 const Login = () => {
+  const [emailError, setEmailError] = useState("");
+
+  const validateEmail = (email: string) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+  
   const [data, setData] = useState<login>({
-    correo: '',
     contrasenia: '',
+    correo: ''
   });
   const navigate = useNavigate();
 
-  const login = () => {
+  const login = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (!validateEmail(data.correo)) {
+      setEmailError("Email is not valid");
+      return;
+    } else {
+      setEmailError("");
+      console.log("Email is valid");
+      console.log({...data});
+    }
+
     RequestUtil.postData({
       url: "save-data",
       params: { ...data },
       queryId: 10,   
       fnOk({dataList, message}) {
         if (message === '') return MessageUtil('error', `Usuario o contraseña incorrecto`, "");
-        let nameUser = dataList[0].nombre
-        localStorage.setItem('user', nameUser);
+        let name = dataList[0].nombre
+        let lastname = dataList[0].apellidos
+        localStorage.setItem('user', name);
+        localStorage.setItem('apellidos', lastname);
         navigate('home');
       }
     });
@@ -50,8 +69,9 @@ const Login = () => {
               id="correo" 
               name="correo" 
               placeholder="@example.com" 
-              onChange={(e) => handleInputChanges(e, data, setData)}
+              onChange={event => setData({ ...data, correo: event.target.value })}
             />
+            <span style={{ color: "red" }}>{emailError}</span>
           </div>
           <div className="form-item">
             <label htmlFor="contrasenia">Contraseña</label>
@@ -61,11 +81,8 @@ const Login = () => {
               id="contrasenia" 
               name="contrasenia" 
               placeholder="Ingrese su contraseña" 
-              onChange={(e) => handleInputChanges(e, data, setData)}
+              onChange={event => setData({ ...data, contrasenia: event.target.value })}
             />
-          </div>
-          <div className="form-link">
-            <a href="#">Olvidé mi contraseña</a>
           </div>
           <button name="login" className="btn enviar" onClick={login}>Ingresar</button>
         </article>

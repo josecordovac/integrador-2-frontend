@@ -14,7 +14,11 @@ const Header = () => {
   };
 
   useEffect(() => {
-    setNameUser(localStorage.getItem('user'));
+    const name = localStorage.getItem('user');
+    const lastname = localStorage.getItem('apellidos');
+    if (name !== null && lastname !== null) {
+      setNameUser(name.substring(0,1) + lastname.substring(0,1));
+    }    
   }, []);
 
   return (

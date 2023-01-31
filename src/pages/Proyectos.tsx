@@ -113,12 +113,12 @@ const Proyectos = () => {
         name="codigo_gestion"
         value={data.codigo_gestion}
         onChange={(e) => handleInputChanges(e, data, setData)}
-        type="text"
+        type="number"
       />
       </Grid>
       <Grid item xs={5} sm={5} md={5} lg={2} xl={2}>
         <SelectComponent
-          label="Tipo de proyecto"
+          label="Tipo"
           list={listProyectType}
           name="id_tipo"
           value={data.id_tipo}
@@ -127,7 +127,7 @@ const Proyectos = () => {
       </Grid>
       <Grid item xs={5} sm={5} md={5} lg={2} xl={2}>
         <SelectComponent
-          label="Estado del proyecto"
+          label="Estado"
           list={listState}
           name="id_estado"
           value={data.id_estado}
@@ -136,7 +136,7 @@ const Proyectos = () => {
       </Grid>
       <Grid item xs={5} sm={5} md={3} lg={2} xl={2}>
         <SelectComponent
-          label="Seleccione un cliente"
+          label="Cliente"
           list={listClients}
           name="id_cliente"
           value={data.id_cliente}
